@@ -3,8 +3,11 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { Button } from './components/ui/button'
+import { useTranslation } from 'react-i18next'
+import { LANGUAGES } from './i18n'
 
 function App() {
+  const { t, i18n } = useTranslation()
   const [count, setCount] = useState(0)
   const [isDark, setIsDark] = useState(() => {
     // Check if dark mode is already set in localStorage or system preference
@@ -28,6 +31,11 @@ function App() {
     setIsDark((prev) => !prev)
   }
 
+  const changeLanguage = (language: string) => {
+    i18n.changeLanguage(language)
+  }
+
+  const currentLanguage = LANGUAGES[i18n.language as keyof typeof LANGUAGES]
   return (
     <>
       <div>
@@ -38,27 +46,13 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <Button variant="default">Click me</Button>
-      <Button variant="outline">Click me</Button>
-      <Button variant="destructive">Click me</Button>
-      <Button variant="secondary">Click me</Button>
-      <Button variant="ghost">Click me</Button>
-      <Button variant="link">Click me</Button>
+      <Button variant="default" onClick={() => changeLanguage('en')}>{LANGUAGES.en}</Button>
+      <Button variant="default" onClick={() => changeLanguage('vi')}>{LANGUAGES.vi}</Button>
       <Button variant="outline" onClick={toggleTheme}>
         {isDark ? '☀️ Light' : '🌙 Dark'}
       </Button>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>{t('title')}</h1>
+      
     </>
   )
 }
