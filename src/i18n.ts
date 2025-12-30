@@ -27,6 +27,8 @@ i18n
     defaultNS: 'home',
     ns: ['home'],
     debug: true,
+    // Load language from localStorage if available
+    lng: localStorage.getItem('i18nextLng') || 'en',
 
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default

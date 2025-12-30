@@ -33,9 +33,11 @@ function App() {
 
   const changeLanguage = (language: string) => {
     i18n.changeLanguage(language)
+    localStorage.setItem('i18nextLng', language)
   }
 
-  const currentLanguage = LANGUAGES[i18n.language as keyof typeof LANGUAGES]
+  const currentLanguage = i18n.language as keyof typeof LANGUAGES
+
   return (
     <>
       <div>
@@ -46,8 +48,23 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <Button variant="default" onClick={() => changeLanguage('en')}>{LANGUAGES.en}</Button>
-      <Button variant="default" onClick={() => changeLanguage('vi')}>{LANGUAGES.vi}</Button>
+      
+      {/* Language Switcher */}
+      <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+        <Button 
+          variant={currentLanguage === 'en' ? 'default' : 'outline'} 
+          onClick={() => changeLanguage('en')}
+        >
+          {LANGUAGES.en}
+        </Button>
+        <Button 
+          variant={currentLanguage === 'vi' ? 'default' : 'outline'} 
+          onClick={() => changeLanguage('vi')}
+        >
+          {LANGUAGES.vi}
+        </Button>
+      </div>
+
       <Button variant="outline" onClick={toggleTheme}>
         {isDark ? '☀️ Light' : '🌙 Dark'}
       </Button>
