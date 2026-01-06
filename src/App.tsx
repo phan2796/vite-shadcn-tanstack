@@ -48,7 +48,16 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      
+      <Button variant="default">Click me</Button>
+      <Button variant="outline">Click me</Button>
+      <Button variant="secondary">Click me</Button>
+      <Button variant="ghost">Click me</Button>
+      <Button variant="link">Click me</Button>
+      <Button variant="destructive">Click me</Button>
+
+      <br />
+      <br />
+      <br />
       {/* Language Switcher */}
       <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
         <Button 
